@@ -1,0 +1,12 @@
+currencyProfileName = "BTC"
+
+[log]
+format = "logfmt"
+level = "error"
+
+[telemetry]
+address = "0.0.0.0:10000"
+
+[stratum]
+port=5010
+

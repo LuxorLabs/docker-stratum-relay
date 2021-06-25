@@ -1,0 +1,79 @@
+version: "3.7"
+
+volumes:
+  vmdata: {}
+  vmagentdata: {}
+
+services:
+  relay:
+    container_name: relay
+    image: luxorlabs/relay:v0.0.2
+    volumes:
+      - vmagentdata:/vmagentdata
+      - ./relay/config.toml:/relayproxy.toml
+    ports:
+      - 10000:10000
+      - 5006:5006
+
+  victoriametrics:
+    container_name: relaymetrics
+    image: victoriametrics/victoria-metrics
+    ports:
+      - 8428:8428
+      - 8089:8089
+      - 8089:8089/udp
+      - 2003:2003
+      - 2003:2003/udp
+      - 4242:4242
+    volumes:
+      - vmdata:/storage
+    command:
+      - '--storageDataPath=/storage'
+      - '--graphiteListenAddr=:2003'
+      - '--opentsdbListenAddr=:4242'
+      - '--httpListenAddr=:8428'
+      - '--influxListenAddr=:8089'
+    restart: always
+
+  vmui:
+    container_name: relayvmui
+    image: victoriametrics/ui
+    ports:
+      - 8080:8080
+    restart: always
+
+  vmagent:
+    container_name: relayagent
+    image: victoriametrics/vmagent
+    depends_on:
+      - "victoriametrics"
+    ports:
+      - 8429:8429
+    volumes:
+      - vmagentdata:/vmagentdata
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--promscrape.config=/etc/prometheus/prometheus.yml'
+      - '--remoteWrite.url=http://victoriametrics:8428/api/v1/write'
+    restart: always
+
+  grafana:
+    user: root
+    image: grafana/grafana:latest
+    container_name: relaygrafana
+    volumes:
+      - ./grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:z
+      - ./grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml:z
+      - ./grafana/dashboards:/etc/dashboards:z
+      - ./grafana/grafana_icon.svg:/usr/share/grafana/public/img/grafana_icon.svg:rw
+      - ./grafana/favicon.png:/usr/share/grafana/public/img/fav32.png:rw
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+    restart: unless-stopped
+    expose:
+      - 3010
+    ports:
+      - 3010:3000
