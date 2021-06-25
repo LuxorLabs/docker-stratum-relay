@@ -13,7 +13,7 @@ services:
       - ./relay/config.toml:/relayproxy.toml
     ports:
       - 10000:10000
-      - 5006:5006
+      - 5010:5010
 
   victoriametrics:
     container_name: relaymetrics
