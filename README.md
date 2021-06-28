@@ -77,6 +77,12 @@ You can also run the Docker containers in the background with:
 docker compose up -d
 ```
 
+System Requirements
+---------------
+The full Relay installation will require:
+- 500Mb of disk space for the docker images
+- 250Mb of memory for the Grafana + Prometheus metrics
+
 Accessing the Dashboard
 -----------------------
 Luxor Relay comes with a full metrics suite for analyzing share data and
