@@ -7,7 +7,7 @@ volumes:
 services:
   relay:
     container_name: relay
-    image: luxorlabs/relay:v0.0.2
+    image: luxorlabs/relay:v0.0.3
     volumes:
       - vmagentdata:/vmagentdata
       - ./relay/config.toml:/relayproxy.toml
@@ -33,13 +33,6 @@ services:
       - '--opentsdbListenAddr=:4242'
       - '--httpListenAddr=:8428'
       - '--influxListenAddr=:8089'
-    restart: always
-
-  vmui:
-    container_name: relayvmui
-    image: victoriametrics/ui
-    ports:
-      - 8080:8080
     restart: always
 
   vmagent:
