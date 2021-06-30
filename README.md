@@ -77,6 +77,16 @@ You can also run the Docker containers in the background with:
 docker compose up -d
 ```
 
+Updating Miner Config
+---------------
+
+To switch the miners over to use the Relay, just update the Stratum URL: 
+```
+<relay_ip_adr>:5010
+```
+
+
+
 System Requirements
 ---------------
 The full Relay installation will require:
@@ -91,6 +101,7 @@ access the dashboard once the `docker-compose` stack is up by going to
 `http://localhost:3010/d/relay/luxor-relay-metrics` in your browser.
 
 Happy hashing!
+
 
 
 
