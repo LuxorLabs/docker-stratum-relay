@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="460" height="300" src="./assets/luxor-relay.png">
+  <img width="460" height="100%" src="./assets/luxor-relay.png">
 </p>
 
 Luxor Relay
