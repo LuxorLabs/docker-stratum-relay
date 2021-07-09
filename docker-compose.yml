@@ -7,7 +7,7 @@ volumes:
 services:
   relay:
     container_name: relay
-    image: luxorlabs/relay:v0.0.3
+    image: luxorlabs/relay:v0.0.9
     volumes:
       - vmagentdata:/vmagentdata
       - ./relay/config.toml:/relayproxy.toml
