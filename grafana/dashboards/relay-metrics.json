@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1624041972362,
+  "iteration": 1628698037132,
   "links": [],
   "panels": [
     {
@@ -52,18 +52,20 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.2",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(backend_outbound_shares_diff{share_type=\"valid\",pod=~\"$pod\"}[$__interval])) * 2 ^ 32 / 1e12",
+          "expr": "sum(rate(backend_outbound_shares_diff{share_type=\"valid\"}[$__interval])) * 2 ^ 32 / 1e12",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -118,18 +120,20 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.2",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (share_type)(increase(backend_outbound_shares{share_type=\"valid\", pod=~\"$pod\"}[$__range])) / ignoring(share_type) group_left sum(increase(backend_outbound_shares{pod=~\"$pod\"}[$__range]))",
+          "expr": "sum by (share_type)(increase(backend_outbound_shares{share_type=\"valid\"}[$__range])) / ignoring(share_type) group_left sum(increase(backend_outbound_shares[$__range]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -171,18 +175,20 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.4.2",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (backend_name) (backend_up{pod=~\"$pod\"})",
+          "expr": "sum by (backend_name) (backend_up)",
           "interval": "",
           "legendFormat": "{{backend_name}}",
           "refId": "A"
@@ -233,17 +239,19 @@
         "displayMode": "lcd",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "",
           "values": false
         },
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "7.4.2",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
-          "expr": "go_memstats_sys_bytes{pod=~\"$pod\"}",
+          "expr": "go_memstats_sys_bytes",
           "interval": "",
           "legendFormat": "{{job}}",
           "refId": "A"
@@ -302,7 +310,7 @@
         "alertThreshold": true
       },
       "percentage": true,
-      "pluginVersion": "7.4.2",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -313,7 +321,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (share_type)(increase(backend_outbound_shares{pod=~\"$pod\"}[$__interval])) / ignoring(share_type) group_left sum(increase(backend_outbound_shares{pod=~\"$pod\"}[$__interval]))",
+          "expr": "sum by (share_type)(increase(backend_outbound_shares[$__interval])) / ignoring(share_type) group_left sum(increase(backend_outbound_shares[$__interval]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -424,11 +432,11 @@
           }
         ]
       },
-      "pluginVersion": "7.4.2",
+      "pluginVersion": "7.3.7",
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(proxy_worker_up{pod=~\"$pod\"}) without (worker_addr, job, instance, pod) != 0",
+          "expr": "sum(proxy_worker_up) without (worker_addr, job, instance, pod) != 0",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -499,7 +507,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.2",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -510,7 +518,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "(sum by (backend_name) (rate(backend_outbound_shares_diff{pod=~\"$pod\"}[$__interval]))) * 2 ^ 32 / 1e12",
+          "expr": "(sum by (backend_name) (rate(backend_outbound_shares_diff[$__interval]))) * 2 ^ 32 / 1e12",
           "instant": false,
           "interval": "",
           "legendFormat": "{{backend_name}}",
@@ -560,46 +568,14 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 27,
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(backend_up, pod)",
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "pod",
-        "multi": true,
-        "name": "pod",
-        "options": [],
-        "query": {
-          "query": "label_values(backend_up, pod)",
-          "refId": "Prometheus-pod-Variable-Query"
-        },
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      }
-    ]
+    "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
