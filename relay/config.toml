@@ -7,6 +7,9 @@ level = "error"
 [telemetry]
 address = "0.0.0.0:10000"
 
+[telemetry.metrics]
+enableMetrics = true
+
 [stratum]
 port=5010
 
