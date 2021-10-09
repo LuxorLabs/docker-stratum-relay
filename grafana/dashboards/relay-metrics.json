@@ -133,7 +133,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (share_type)(increase(backend_outbound_shares{share_type=\"valid\"}[$__range])) / ignoring(share_type) group_left sum(increase(backend_outbound_shares[$__range]))",
+          "expr": "sum by (share_type)(increase(backend_outbound_shares_diff{share_type=\"valid\"}[$__range])) / ignoring(share_type) group_left sum(increase(backend_outbound_shares_diff[$__range]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
