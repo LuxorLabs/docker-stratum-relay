@@ -86,6 +86,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 2,
           "custom": {},
           "mappings": [],
           "max": 1,
@@ -188,9 +189,9 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum by (backend_name) (backend_up)",
+          "expr": "sum(backend_up)",
           "interval": "",
-          "legendFormat": "{{backend_name}}",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -259,7 +260,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Go Memory",
+      "title": "Memory",
       "type": "bargauge"
     },
     {
@@ -334,7 +335,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Share Validations (backend_outbound_shares)",
+      "title": "Share Validations",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -518,10 +519,10 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "(sum by (backend_name) (rate(backend_outbound_shares_diff[$__interval]))) * 2 ^ 32 / 1e12",
+          "expr": "(sum(rate(backend_outbound_shares_diff[$__interval]))) * 2 ^ 32 / 1e12",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{backend_name}}",
+          "legendFormat": "Hashrate",
           "refId": "A"
         }
       ],
@@ -529,7 +530,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Valid Hashrate By Backend (backend_outbound_shares_diff)",
+      "title": "Valid Hashrate",
       "tooltip": {
         "shared": true,
         "sort": 0,

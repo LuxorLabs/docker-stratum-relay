@@ -213,7 +213,13 @@
         }
       },
       {
-        "aliasColors": {},
+        "aliasColors": {
+          "bad_hash": "semi-dark-orange",
+          "bad_params": "semi-dark-red",
+          "low_difficulty": "dark-blue",
+          "unknown": "super-light-blue",
+          "valid": "semi-dark-green"
+        },
         "bars": true,
         "dashLength": 10,
         "dashes": false,
@@ -273,7 +279,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Share Validations (backend_outbound_shares)",
+        "title": "Share Validations",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -311,7 +317,13 @@
         }
       },
       {
-        "aliasColors": {},
+        "aliasColors": {
+          "bad_hash": "semi-dark-orange",
+          "bad_params": "semi-dark-red",
+          "low_difficulty": "dark-blue",
+          "unknown": "super-light-blue",
+          "valid": "semi-dark-green"
+        },
         "bars": false,
         "dashLength": 10,
         "dashes": false,
