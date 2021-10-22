@@ -86,6 +86,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 2,
           "custom": {},
           "mappings": [],
           "max": 1,
